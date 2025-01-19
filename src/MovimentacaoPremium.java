@@ -1,44 +1,54 @@
 public class MovimentacaoPremium {
-    private int posX; // Coordenada X
-    private int posY; // Coordenada Y
-
-    // Construtor para inicializar as coordenadas
-    public MovimentacaoPremium(int posX, int posY) {
-        this.posX = posX;
-        this.posY = posY;
+    private Turtle a;
+    private String bzin;
+    private int czin;
+    // Construtor para inicializar a movimentação da tartaruga
+    public MovimentacaoPremium(Turtle a) {
+        if (a == null) {
+            throw new IllegalArgumentException("O objeto Turtle não pode ser nulo.");
+        }
+        this.a = a;
     }
 
     // Método para mover para cima
-    public void up() {
-        posX += 1; // Incrementa o eixo X
+    public void mover(String bzin) {
+        switch(bzin){
+            case "up":
+            a.posY++;
+            break;
+            case "down":
+            a.posY--;
+            break;
+            case "left":
+            a.posX--;
+            break;
+            case "right":
+            a.posX++;
+            break;
+            default:
+            System.out.println("Movimento invalido");
+            break;
+        }
     }
-
-    // Método para mover para baixo
-    public void down() {
-        posX -= 1; // Decrementa o eixo X
+        public void mover(int czin) {
+        switch(czin){
+            case 1:
+            a.posY++;
+            break;
+            case 2:
+            a.posY--;
+            break;
+            case 4:
+            a.posX--;
+            break;
+            case 3:
+            a.posX++;
+            break;
+            default:
+            System.out.println("Movimento invalido");
+            break;
+            
+        }
     }
-
-    // Método para mover para a direita
-    public void right() {
-        posY += 1; // Incrementa o eixo Y
-    }
-
-    // Método para mover para a esquerda
-    public void left() {
-        posY -= 1; // Decrementa o eixo Y
-    }
-
-    // Métodos para obter as posições atuais
-    public int getPosX() {
-        return posX;
-    }
-
-    public int getPosY() {
-        return posY;
-    }
-
-    // Método para exibir as coordenadas atuais
-    public void showPosition() {
-        System.out.println("Posição atual: (" + posX + ", " + posY + ")");
-    }
+    
 }
