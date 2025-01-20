@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class App {
+public class Appp {
     public static void main(String[] args) throws Exception {
         int tamanho = 4;
         Scanner scanner = new Scanner(System.in);
@@ -19,8 +19,11 @@ public class App {
 
         
         //
-        Turtle a = new Turtle(0,0,"red");
-        MovimentacaoPremium movimento = new MovimentacaoPremium(a);
+        Turtle a = new Turtle(0,0,"pink");
+        Turtlehighiq b = new Turtlehighiq("blue");
+        MovimentacaoPremium movimento1 = new MovimentacaoPremium(a);
+        MovimentacaoPremium movimento2 = new MovimentacaoPremium(b);
+        
 
         // Declaração da matriz
         String[][] matriz = new String[tamanho][tamanho];
@@ -28,13 +31,18 @@ public class App {
         // Preenchendo a matriz com os valores {posX, posY}
             for (int posX = 0; posX < tamanho; posX++) {
             for (int posY = 0; posY < tamanho; posY++) {
-                if (a.posX == posX && a.posY == posY) {
-                    matriz[posX][posY] = "{" + a.cor + "}";
+                if ((a.posX == posX && a.posY == posY) && (b.posX == posX && b.posY == posY)){
+                    matriz[posX][posY] = "{" + a.cor +" " + b.cor + "}";
+                }
+                else if (a.posX == posX && a.posY == posY) {
+                    matriz[posX][posY] = "{" + a.cor + "     }";
+                } else if(b.posX == posX && b.posY == posY){
+                    matriz[posX][posY] = "{" + b.cor + "     }";
                 } else if(cereja.x == posX && cereja.y == posY){
-                    matriz[posX][posY] = "{CMD)";
+                    matriz[posX][posY] = "{CMD     }";
                 }
                 else {
-                    matriz[posX][posY] = "{   }";
+                    matriz[posX][posY] = "{         }";
                 }
             }
             }
@@ -47,10 +55,10 @@ public class App {
             System.out.println();
         }
         int i = 0;
-        
+        boolean count = true;
         boolean action = true;
         while(true){
-            while (action) {
+           /* while (action) {
             System.out.println("a");
             String kar = scanner.next();
 
@@ -78,9 +86,17 @@ public class App {
                 System.out.println("Entrada inválida. Tente novamente.");
                 action = true;
             }
+            }*/
+            if(count){
+                movimento1.mover(a);
+                count = false;
+            }else{
+                movimento2.mover(b);
+                count = true;
             }
-            	
-            for (int posX = 0; posX < tamanho; posX++) {
+            System.out.println("");
+
+            /*for (int posX = 0; posX < tamanho; posX++) {
             for (int posY = 0; posY < tamanho; posY++) {
                 if (a.posX == posX && a.posY == posY) {
                     matriz[posX][posY] = "{" + a.cor + "}";
@@ -91,8 +107,24 @@ public class App {
                     matriz[posX][posY] = "{   }";
                 }
             }
+            }*/
+            for (int posX = 0; posX < tamanho; posX++) {
+            for (int posY = 0; posY < tamanho; posY++) {
+                if ((a.posX == posX && a.posY == posY) && (b.posX == posX && b.posY == posY)){
+                    matriz[posX][posY] = "{" + a.cor +" " + b.cor + "}";
+                }
+                else if (a.posX == posX && a.posY == posY) {
+                    matriz[posX][posY] = "{" + a.cor + "     }";
+                } else if(b.posX == posX && b.posY == posY){
+                    matriz[posX][posY] = "{" + b.cor + "     }";
+                } else if(cereja.x == posX && cereja.y == posY){
+                    matriz[posX][posY] = "{CMD      }";
+                }
+                else {
+                    matriz[posX][posY] = "{         }";
+                }
             }
-
+            }
 
 
             for (int posY = tamanho - 1; posY >= 0; posY--) { // Iteração do topo para baixo
@@ -102,7 +134,7 @@ public class App {
             System.out.println();
 
             }
-            if (cereja.verificarComida(a)){
+            if (cereja.verificarComida(a) || cereja.verificarComida(b)){
                 break;
 
             }

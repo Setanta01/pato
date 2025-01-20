@@ -14,4 +14,11 @@ public class Comida {
             return this.x == a.posX && this.y == a.posY;
         }
     }
+    public boolean verificarComida(Turtlehighiq b){
+        if (b == null){
+            throw new IllegalArgumentException("O objeto Turtle não pode ser nulo.");
+        }else{
+            return this.x == b.posX && this.y == b.posY;
+        }
+    }
     }
