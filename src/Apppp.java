@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Appp {
+public class Apppp {
     public static void main(String[] args) throws Exception {
         int tamanho = 4;
         Scanner scanner = new Scanner(System.in);
@@ -20,7 +20,7 @@ public class Appp {
         
         //
         Turtle a = new Turtle(0,0,"pink");
-        Turtle b = new Turtle("blue");
+        Turtlehighiq b = new Turtlehighiq("blue");
         MovimentacaoPremium movimento1 = new MovimentacaoPremium(a);
         MovimentacaoPremium movimento2 = new MovimentacaoPremium(b);
         
@@ -89,14 +89,16 @@ public class Appp {
                 action = true;
             }
             }*/
-            if(count){
+            if(count && a.ingame){
                 movimento1.mover(a);
                 count = false;
                 i1++;
-            }else{
+            }else if(b.ingame){
                 movimento2.mover(b);
                 count = true;
                 i2++;
+            }else{
+                count = true;
             }
             System.out.println("");
 
@@ -138,18 +140,19 @@ public class Appp {
             System.out.println();
 
             }
-            if (cereja.verificarComida(a) || cereja.verificarComida(b)){
-                if(cereja.verificarComida(a)){
-                    System.out.println("O " + a.cor + " ganhou com " + i1 + " jogadas");
-                }else{
-                    System.out.println("O " + b.cor + " ganhou com " + i2 + " jogadas");
-                }
+            if (cereja.verificarComida(a)){
+                a.ingame = false;
+            }
+            if (cereja.verificarComida(b)){
+                b.ingame = false;   
+            }
+            if (cereja.verificarComida(a) && cereja.verificarComida(b)){
                 System.out.println("O " + a.cor + " fez " + a.jogadasval + " validas e " + a.jogadasinval + " joga invalidas");
                 System.out.println("O " + b.cor + " fez " + b.jogadasval + " validas e " + b.jogadasinval + " joga invalidas");
                 break;
 
             }
-            action = true;
+            //action = true;
     }
     
 }

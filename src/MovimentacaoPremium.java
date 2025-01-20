@@ -1,5 +1,6 @@
 import java.util.Random;
 
+
 public class MovimentacaoPremium {
     public Random random = new Random();
     private int x;
@@ -20,17 +21,16 @@ public class MovimentacaoPremium {
         this.b = b;
     }
 
-    // Método genérico para obter a posição X
+
     private int getPosX() {
         return a != null ? a.getPosX() : b.getPosX();
     }
 
-    // Método genérico para obter a posição Y
     private int getPosY() {
         return a != null ? a.getPosY() : b.getPosY();
     }
 
-    // Método genérico para atualizar posição
+
     private void setPos(int x, int y) {
         if (a != null) {
             a.setPos(x, y);
@@ -118,8 +118,10 @@ public class MovimentacaoPremium {
         x = random.nextInt(4) + 1; // Gera um número entre 1 e 4
         try {
             mover(x);
+            a.jogadasval++;
         } catch (MovimentoInvalidoException e) {
             System.out.println(e.getMessage());
+            a.jogadasinval++;
         }
     }
 
@@ -131,8 +133,10 @@ public class MovimentacaoPremium {
                 x = random.nextInt(4) + 1;
             }
             mover(x);
+            b.jogadasval++;
         } catch (MovimentoInvalidoException e) {
             System.out.println(e.getMessage());
+            b.jogadasinval++;
         }
         b.mem = x;
     }
