@@ -22,16 +22,16 @@ public class MovimentacaoPremium {
     }
 
 
-    private int getPosX() {
+    public int getPosX() {
         return a != null ? a.getPosX() : b.getPosX();
     }
 
-    private int getPosY() {
+    public int getPosY() {
         return a != null ? a.getPosY() : b.getPosY();
     }
 
 
-    private void setPos(int x, int y) {
+    public void setPos(int x, int y) {
         if (a != null) {
             a.setPos(x, y);
         } else {
@@ -117,6 +117,8 @@ public class MovimentacaoPremium {
     public void mover(Turtle a) {
         x = random.nextInt(4) + 1; // Gera um número entre 1 e 4
         try {
+            a.lastX = getPosX();
+            a.lastY = getPosY();
             mover(x);
             a.jogadasval++;
         } catch (MovimentoInvalidoException e) {
@@ -132,6 +134,8 @@ public class MovimentacaoPremium {
             while (b.mem == x) {
                 x = random.nextInt(4) + 1;
             }
+            b.lastX = getPosX();
+            b.lastY = getPosY();
             mover(x);
             b.jogadasval++;
         } catch (MovimentoInvalidoException e) {
