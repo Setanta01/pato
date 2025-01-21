@@ -5,8 +5,8 @@ public class Turtle {
     public int comidas;
     public int jogadasval;
     public int jogadasinval;
-    public int lastX;
-    public int lastY;
+    public int lastX = 0;
+    public int lastY = 0;
     public boolean ingame  = true;
     
     public Turtle(int posX, int posY, String cor) {

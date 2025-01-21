@@ -1,86 +1,95 @@
 import java.util.Scanner;
 
 public class Appppp {
+
     public static void main(String[] args) throws Exception {
         int tamanho = 4;
         Scanner scanner = new Scanner(System.in);
         Comida cereja = new Comida();
         int nhac;
+                Turtle a = new Turtle(0,0,"pink");
+                Turtle b = new Turtle("blue");
+                MovimentacaoPremium movimento1 = new MovimentacaoPremium(a);
+                MovimentacaoPremium movimento2 = new MovimentacaoPremium(b);
 
-        System.out.println("Digite o X da comida");
-        nhac = scanner.nextInt();
-        cereja.x = nhac;
-        System.out.println("Digite o Y da comida");
-        nhac = scanner.nextInt();
-        cereja.y = nhac;
-        Bomba[] bombas;
-        int numBombas;
-        Parede[] paredes;
-        int numParedes;
-        System.out.println("Digite a quantidade de bombas");
-        nhac = scanner.nextInt();
-        numBombas = nhac;
-        bombas = new Bomba[numBombas];
-        for (int i = 0; i < numBombas; i++) {
-            System.out.println("Escolha a pos X da bomba " + (i + 1) + ":");
-            nhac = scanner.nextInt();
-            bombas[i].posX = nhac;
-            System.out.println("Escolha a pos Y da bomba " + (i + 1) + ":");
-            bombas[i].posY = nhac;
-        }
-        System.out.println("Digite a quantidade de paredes");
-        nhac = scanner.nextInt();
-        numParedes = nhac;
-        paredes = new Parede[numParedes];
-        for (int i = 0; i < numParedes; i++) {
-            System.out.println("Escolha a pos X da parede " + (i + 1) + ":");
-            nhac = scanner.nextInt();
-            paredes[i].posX = nhac;
-            System.out.println("Escolha a pos Y da parede " + (i + 1) + ":");
-            paredes[i].posY = nhac;
-        }        
-        
+                System.out.println("Digite o X da comida");
+                nhac = scanner.nextInt();
+                cereja.x = nhac;
+                System.out.println("Digite o Y da comida");
+                nhac = scanner.nextInt();
+                cereja.y = nhac;
+
+                
+                Bomba[] bombas;
+                int numBombas;
+                Parede[] paredes;
+                int numParedes;
+               System.out.println("Digite a quantidade de bombas:");
+nhac = scanner.nextInt();
+numBombas = nhac;
+bombas = new Bomba[numBombas];
+for (int i = 0; i < numBombas; i++) {
+    bombas[i] = new Bomba(); // Inicializa a bomba
+    System.out.println("Escolha a pos X da bomba " + (i + 1) + ":");
+    nhac = scanner.nextInt();
+    bombas[i].posX = nhac;
+    System.out.println("Escolha a pos Y da bomba " + (i + 1) + ":");
+    nhac = scanner.nextInt();
+    bombas[i].posY = nhac;
+}
+
+System.out.println("Digite a quantidade de paredes:");
+nhac = scanner.nextInt();
+numParedes = nhac;
+paredes = new Parede[numParedes];
+for (int i = 0; i < numParedes; i++) {
+    paredes[i] = new Parede(); // Inicializa a parede
+    System.out.println("Escolha a pos X da parede " + (i + 1) + ":");
+    nhac = scanner.nextInt();
+    paredes[i].posX = nhac;
+    System.out.println("Escolha a pos Y da parede " + (i + 1) + ":");
+    nhac = scanner.nextInt();
+    paredes[i].posY = nhac;
+}     
+                
 
 
-        
-        //
-        Turtle a = new Turtle(0,0,"pink");
-        Turtle b = new Turtle("blue");
-        MovimentacaoPremium movimento1 = new MovimentacaoPremium(a);
-        MovimentacaoPremium movimento2 = new MovimentacaoPremium(b);
-        
+                
+                //
 
-        // Declaração da matriz
-        String[][] matriz = new String[tamanho][tamanho];
+                
 
-        // Preenchendo a matriz com os valores {posX, posY}
-            for (int posX = 0; posX < tamanho; posX++) {
+                // Declaração da matriz
+                String[][] matriz = new String[tamanho][tamanho];
+                
+                // Preenchendo a matriz com os valores {posX, posY}
+        for (int posX = 0; posX < tamanho; posX++) {
             for (int posY = 0; posY < tamanho; posY++) {
-                if ((a.posX == posX && a.posY == posY) && (b.posX == posX && b.posY == posY)){
-                    matriz[posX][posY] = "{" + a.cor +" " + b.cor + "}";
-                }
-                else if (a.posX == posX && a.posY == posY) {
+                if ((a.posX == posX && a.posY == posY) && (b.posX == posX && b.posY == posY)) {
+                    matriz[posX][posY] = "{" + a.cor + " " + b.cor + "}";
+                } else if (a.posX == posX && a.posY == posY) {
                     matriz[posX][posY] = "{" + a.cor + "     }";
-                } else if(b.posX == posX && b.posY == posY){
+                } else if (b.posX == posX && b.posY == posY) {
                     matriz[posX][posY] = "{" + b.cor + "     }";
-                } else if(cereja.x == posX && cereja.y == posY){
-                    matriz[posX][posY] = "{CMD     }";
-                }else if(){
-                    
-                }
-                else {
+                } else if (cereja.x == posX && cereja.y == posY) {
+                    matriz[posX][posY] = "{CMD      }";
+                } else if (isPositionBomb(posX, posY, bombas)) {
+                    matriz[posX][posY] = "{BOMBA    }";
+                } else if (isPositionWall(posX, posY, paredes)) {
+                    matriz[posX][posY] = "{PAREDE   }";
+                } else {
                     matriz[posX][posY] = "{         }";
                 }
             }
-            }
-
-        // Exibindo a matriz com (0, 0) no canto inferior esquerdo
-        for (int posY = tamanho - 1; posY >= 0; posY--) { // Iteração do topo para baixo
-            for (int posX = 0; posX < tamanho; posX++) {
-                System.out.print(matriz[posX][posY] + " ");
-            }
-            System.out.println();
         }
+
+                // Exibindo a matriz com (0, 0) no canto inferior esquerdo
+                for (int posY = tamanho - 1; posY >= 0; posY--) { // Iteração do topo para baixo
+                    for (int posX = 0; posX < tamanho; posX++) {
+                        System.out.print(matriz[posX][posY] + " ");
+                    }
+                    System.out.println();
+                }
         int i = 0;
         int i1 = 0;
         int i2 = 0;
@@ -130,6 +139,7 @@ public class Appppp {
             System.out.println("");
 
             /*for (int posX = 0; posX < tamanho; posX++) {
+
             for (int posY = 0; posY < tamanho; posY++) {
                 if (a.posX == posX && a.posY == posY) {
                     matriz[posX][posY] = "{" + a.cor + "}";
@@ -141,23 +151,39 @@ public class Appppp {
                 }
             }
             }*/
-            for (int posX = 0; posX < tamanho; posX++) {
+            for (int q = 0; q < numParedes; q++){
+                paredes[q].bater(a);
+                paredes[q].bater(b);
+            }
+
+            for (int w = 0; w < numBombas; w++){
+                bombas[w].bater(a);
+                bombas[w].bater(b);
+            }
+
+
+
+
+
+        for (int posX = 0; posX < tamanho; posX++) {
             for (int posY = 0; posY < tamanho; posY++) {
-                if ((a.posX == posX && a.posY == posY) && (b.posX == posX && b.posY == posY)){
-                    matriz[posX][posY] = "{" + a.cor +" " + b.cor + "}";
-                }
-                else if (a.posX == posX && a.posY == posY) {
+                if ((a.posX == posX && a.posY == posY) && (b.posX == posX && b.posY == posY)) {
+                    matriz[posX][posY] = "{" + a.cor + " " + b.cor + "}";
+                } else if (a.posX == posX && a.posY == posY) {
                     matriz[posX][posY] = "{" + a.cor + "     }";
-                } else if(b.posX == posX && b.posY == posY){
+                } else if (b.posX == posX && b.posY == posY) {
                     matriz[posX][posY] = "{" + b.cor + "     }";
-                } else if(cereja.x == posX && cereja.y == posY){
+                } else if (cereja.x == posX && cereja.y == posY) {
                     matriz[posX][posY] = "{CMD      }";
-                }
-                else {
+                } else if (isPositionBomb(posX, posY, bombas)) {
+                    matriz[posX][posY] = "{BOMBA    }";
+                } else if (isPositionWall(posX, posY, paredes)) {
+                    matriz[posX][posY] = "{PAREDE   }";
+                } else {
                     matriz[posX][posY] = "{         }";
                 }
             }
-            }
+        }
 
 
             for (int posY = tamanho - 1; posY >= 0; posY--) { // Iteração do topo para baixo
@@ -167,6 +193,8 @@ public class Appppp {
             System.out.println();
 
             }
+
+
 
             if (cereja.verificarComida(a) || cereja.verificarComida(b)){
                 if(cereja.verificarComida(a)){
@@ -188,5 +216,21 @@ public class Appppp {
     }
     
 }
+    private static boolean isPositionBomb(int x, int y, Bomba[] bombas) {
+        for (Bomba bomba : bombas) {
+            if (bomba.posX == x && bomba.posY == y) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    private static boolean isPositionWall(int x, int y, Parede[] paredes) {
+        for (Parede parede : paredes) {
+            if (parede.posX == x && parede.posY == y) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

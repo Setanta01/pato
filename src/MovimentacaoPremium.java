@@ -117,8 +117,8 @@ public class MovimentacaoPremium {
     public void mover(Turtle a) {
         x = random.nextInt(4) + 1; // Gera um número entre 1 e 4
         try {
-            a.lastX = getPosX();
-            a.lastY = getPosY();
+            a.lastX = a.posX;
+            a.lastY = a.posY;
             mover(x);
             a.jogadasval++;
         } catch (MovimentoInvalidoException e) {
@@ -134,8 +134,8 @@ public class MovimentacaoPremium {
             while (b.mem == x) {
                 x = random.nextInt(4) + 1;
             }
-            b.lastX = getPosX();
-            b.lastY = getPosY();
+            b.lastX = b.posX;
+            b.lastY = b.posY;
             mover(x);
             b.jogadasval++;
         } catch (MovimentoInvalidoException e) {

@@ -4,7 +4,6 @@ public abstract class Obst {
     int id;
     Turtle a;
     Turtlehighiq b;
-    MovimentacaoPremium mov = new MovimentacaoPremium(a);
-    MovimentacaoPremium moviq = new MovimentacaoPremium(b);
+
     public void bater(){}   
 }
