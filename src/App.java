@@ -51,7 +51,7 @@ public class App {
         boolean action = true;
         while(true){
             while (action) {
-            System.out.println("a");
+            System.out.println("");
             String kar = scanner.next();
 
     // Verifica se kar é "1", "2", "3" ou "4"
