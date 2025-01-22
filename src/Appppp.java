@@ -193,6 +193,7 @@ for (int i = 0; i < numParedes; i++) {
             System.out.println();
 
             }
+            Thread.sleep(500);
 
 
 

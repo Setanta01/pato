@@ -138,6 +138,7 @@ public class Appp {
             System.out.println();
 
             }
+            Thread.sleep(500);
             if (cereja.verificarComida(a) || cereja.verificarComida(b)){
                 if(cereja.verificarComida(a)){
                     System.out.println("O " + a.cor + " ganhou com " + i1 + " jogadas");

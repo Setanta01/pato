@@ -140,6 +140,7 @@ public class Apppp {
             System.out.println();
 
             }
+            Thread.sleep(500);
             if (cereja.verificarComida(a)){
                 a.ingame = false;
             }
